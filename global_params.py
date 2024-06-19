@@ -1,0 +1,8 @@
+name = "Nastya"
+email = "nastya_mosyazh_10948@example.ru"
+password = "Qwerty1"
+base_url = "https://stellarburgers.nomoreparties.site/"
+login_url = "https://stellarburgers.nomoreparties.site/login"
+register_url = "https://stellarburgers.nomoreparties.site/register"
+profile_url = "https://stellarburgers.nomoreparties.site/account/profile"
+forgot_password_url = "https://stellarburgers.nomoreparties.site/forgot-password"
