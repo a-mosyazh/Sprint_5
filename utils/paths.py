@@ -3,8 +3,6 @@ from global_params import name, email
 
 class ConstructorPage:  # Элементы страницы "Конструктор"
     bun_card = './/main//div[contains(@class, "menuContainer")]//ul[1]/a[1]/img'  # карточка первой булки в списке
-    sauce_card = './/main//div[contains(@class, "menuContainer")]//ul[2]/a[1]/img'  # карточка первого соуса в списке
-    filling_card = './/main//div[contains(@class, "menuContainer")]//ul[3]/a[1]/img'  # карточка первой начинки в списке
     bun_tab = './/span[text()="Булки"]/parent::div'  # вкладка "Булки"
     sauce_tab = './/span[text()="Соусы"]/parent::div'  # вкладка "Соусы"
     filling_tab = './/span[text()="Начинки"]/parent::div'  # вкладка "Начинки"
@@ -37,5 +35,4 @@ class RegistrationPage:  # Элементы страницы регистрац�
     name_field = './/form/fieldset[1]//input[@name="name"]'  # поле "Имя"
     email_field = './/form/fieldset[2]//input[@name="name"]'  # поле "Email"
     password_field = './/form/fieldset[3]//input[@name="Пароль"]'  # поле "Пароль"
-    register_btn = './/button[text()="Зарегистрироваться"]'  # поле "Зарегистрироваться"
-    
+    register_btn = './/button[text()="Зарегистрироваться"]'  # кнопка "Зарегистрироваться"

@@ -2,40 +2,7 @@ import datetime
 import random
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
-
-from global_params import email, password
-from utils.paths import LoginPage, ConstructorPage, HeaderElement, ProfilePage
-
-
-def login(driver):
-    WebDriverWait(driver, 5).until(
-        expected_conditions.visibility_of_element_located((By.XPATH, LoginPage.login_btn))
-    )
-
-    assert driver.find_element(By.XPATH, LoginPage.login_btn).text == 'Войти'
-
-    driver.find_element(By.XPATH, LoginPage.email_field).send_keys(email)
-    driver.find_element(By.XPATH, LoginPage.password_field).send_keys(password)
-    driver.find_element(By.XPATH, LoginPage.login_btn).click()
-    WebDriverWait(driver, 5).until(
-        expected_conditions.visibility_of_element_located((By.XPATH, ConstructorPage.create_order_btn))
-    )
-    assert driver.find_element(By.XPATH, ConstructorPage.create_order_btn).text == 'Оформить заказ'
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/'
-
-
-def logout(driver):
-    driver.find_element(By.XPATH, HeaderElement.profile_btn).click()
-    WebDriverWait(driver, 5).until(
-        expected_conditions.visibility_of_element_located((By.XPATH, ProfilePage.logout_btn))
-    )
-    driver.find_element(By.XPATH, ProfilePage.logout_btn).click()
-    WebDriverWait(driver, 5).until(
-        expected_conditions.visibility_of_element_located((By.XPATH, LoginPage.login_btn))
-    )
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
+from utils.paths import ConstructorPage
 
 
 def generate_email():
@@ -57,3 +24,22 @@ def generate_password():
         new_symbol = random.choice(random.choice(elements))
         generated_password = str(generated_password) + str(new_symbol)
     return generated_password
+
+
+def get_element_position(driver, path):
+    element_position = driver.find_element(By.XPATH, path).location
+    return element_position['y']
+
+
+def is_highlighted(driver, path):
+    return 'tab_type_current' in driver.find_element(By.XPATH, path).get_attribute('class')
+
+
+def has_scrolled(driver, initial_position):
+    new_position = get_element_position(driver, ConstructorPage.bun_card)
+    return new_position != initial_position
+
+
+def click_on_element(driver, path):
+    element = driver.find_element(By.XPATH, path)
+    driver.execute_script("arguments[0].click();", element)
